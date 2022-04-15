@@ -1,0 +1,18 @@
+<div class="courses-panel">
+  <h3>All Courses</h3>
+  <a class="link" target="_blank" href="https://blog.angular-university.io/angular-material-data-table/"
+    >SOURCE</a
+  >
+  <mat-tab-group>
+    <mat-tab label="Beginners"
+      ><app-course-card-list
+        [courses]="beginnerCourses$ | async"
+      ></app-course-card-list
+    ></mat-tab>
+    <mat-tab label="Advanced"
+      ><app-course-card-list
+        [courses]="advancedCourses$ | async"
+      ></app-course-card-list
+    ></mat-tab>
+  </mat-tab-group>
+</div>

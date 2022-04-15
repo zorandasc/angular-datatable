@@ -1,0 +1,59 @@
+
+export class LessonsDataSource implements DataSource<Lesson>{}
+//our custom Observable-based Angular CDK Data Source
+//In this example, we will not be using the built-in
+//MatTableDataSource because its designed for filtering,
+//sorting and pagination of a client-side data array.
+//In our case, all the filtering, sorting and pagination
+//will be happening on the server, so we will be building
+//our own Angular CDK reactive data source from first principles.
+
+
+//The lessonsSubject is a BehaviorSubject, which means its
+  //subscribers will always get its latest emitted value
+  //(or an initial value), even if they subscribed late (after the value was emitted).
+
+
+Why use BehaviorSubject?
+
+Using BehaviorSubject is a great way of writing code that works independently of the order 
+that we use to perform asynchronous operations such as: calling the backend, binding the data 
+table to the data source, etc.
+
+For example, in this design, the Data Source is not aware of the data table or at which 
+moment the Data Table will require the data. Because the data table subscribed to the 
+connect() observable, it will eventually get the data, even if:
+
+    the data is still in transit coming from the HTTP backend
+    or if the data was already loaded
+
+
+Let's now break down the implementation of the disconnect method:
+
+This method is called once by the data table at component destruction time. 
+In this method, we are going to complete any observables that we have created 
+internally in this class, in order to avoid memory leaks.
+
+
+
+@ViewChild decorato
+But this is not always the case! Sometimes, the AppComponent might need references 
+to the multiple elements that it contains inside its template, in order to mediate 
+their interaction.
+
+If that's the case, then we can obtain references to those template elements and 
+have them injected into the AppComponent class by querying the template: that's what
+ @ViewChild is for.
+
+
+ The value of this injected member variable is not immediately available at component 
+ construction time!
+
+Angular will fill in this property automatically, but only later in the component 
+lifecycle, after the view initialization is completed.
+
+The AfterViewInit Lifecycle Hook
+
+If we want to write component initialization code that uses the references injected by 
+@ViewChild, we need to do it inside the AfterViewInit lifecycle hook.
+
